@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class GridManagerScript : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private GameObject _smileButtonPrefab; // !!!
+    private SmileButtonScript _smileButtonScript; // !!!
 
     private CellScript[,] _map;
     private int _width;
@@ -22,10 +22,14 @@ public class GridManagerScript : MonoBehaviour
         _height = SettingsScript.MapSize.y;
 
         _map = new CellScript[_width, _height];
+        
+        Debug.Log("current mines: " + _currentMines);
 
         // !!!
-        GameObject instance = Instantiate(_smileButtonPrefab, new Vector3(_width / 2.0f - 0.5f, _height + 0.5f), Quaternion.identity);
-        instance.name = "Smile";
+        GameObject smileButton = Instantiate(_smileButtonPrefab, new Vector3(_width / 2.0f - 0.5f, _height + 0.5f), Quaternion.identity);
+        smileButton.name = "SmileButton";
+
+        _smileButtonScript = smileButton.GetComponent<SmileButtonScript>();
         // !!!
 
         GenerateMap();
@@ -37,7 +41,7 @@ public class GridManagerScript : MonoBehaviour
             return;
         }
 
-        Debug.Log("ClickHandler: " + cell.Position.x + ", " + cell.Position.y);
+        // Debug.Log("ClickHandler: " + cell.Position.x + ", " + cell.Position.y);
 
         if (_isFirstClick) {
             _isFirstClick = false;
@@ -54,13 +58,14 @@ public class GridManagerScript : MonoBehaviour
             return;
         }
 
-        if (cell.IsFlagged) {
-            _currentMines++;
+        if (!cell.IsRevealed) {
+            if (cell.IsFlagged) {
+                _currentMines++;
+            }
+            else {
+                _currentMines--;
+            }
         }
-        else {
-            _currentMines--;
-        }
-
         Debug.Log("current mines: " + _currentMines);
 
         cell.SwapFlag();
@@ -156,22 +161,17 @@ public class GridManagerScript : MonoBehaviour
         }
         
         if (_map[x, y].IsFlagged) {
+            _currentMines++;
             _map[x, y].SwapFlag();
         }
 
         int minesNear = CalcMinesNear(x, y);
         if (_map[x, y].Reveal((CellScript.EValue)minesNear) == CellScript.EType.Mine) {
-            _isGameFinished = true;
-            Debug.Log("BAM! YOU LOSE!");
             Lose();
             return;
         }
-        else {
-            if (AreAllSafeRevealed()) {
-                _isGameFinished = true;
-                FlagMines();
-                Debug.Log("ALL ARE REVEALED. WIN!");
-            }
+        else if (AreAllSafeRevealed()) {
+            Win();
         }
 
         if (minesNear != 0) {
@@ -189,6 +189,9 @@ public class GridManagerScript : MonoBehaviour
     }
 
     void Lose() {
+        _isGameFinished = true;
+        Debug.Log("BAM! YOU LOSE!");
+
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 if (_map[x, y].IsFlagged && _map[x, y].Type == CellScript.EType.Mine) {
@@ -202,6 +205,17 @@ public class GridManagerScript : MonoBehaviour
                 _map[x, y].RevealIfMine();
             }
         }
+
+        _smileButtonScript.SetLose();
+    }
+
+    void Win() {
+        _isGameFinished = true;
+        Debug.Log("ALL ARE REVEALED. WIN!");
+
+        FlagMines();
+
+        _smileButtonScript.SetWin();
     }
 
     bool AreAllSafeRevealed() {
