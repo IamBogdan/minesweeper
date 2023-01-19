@@ -30,6 +30,7 @@ public class GridManagerScript : MonoBehaviour
         smileButton.name = "SmileButton";
 
         _smileButtonScript = smileButton.GetComponent<SmileButtonScript>();
+        _smileButtonScript.GridManager = this;
         // !!!
 
         GenerateMap();
@@ -237,5 +238,19 @@ public class GridManagerScript : MonoBehaviour
                 }
             }
         }       
+    }
+
+    public void ResetGame() {
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                _map[x, y].Init(new Vector2Int(x, y), CellScript.EType.Safe);
+            }
+        }
+        
+        GenerateMines();
+
+        _isFirstClick = true;
+        _isGameFinished = false;
+        _currentMines = _totalMines;
     }
 }
