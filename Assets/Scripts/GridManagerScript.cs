@@ -6,7 +6,6 @@ public class GridManagerScript : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private GameObject _smileButtonPrefab; // !!!
-    private SmileButtonScript _smileButtonScript; // !!!
 
     private CellScript[,] _map;
     private int _width;
@@ -16,21 +15,30 @@ public class GridManagerScript : MonoBehaviour
     private bool _isFirstClick = true;
     private bool _isGameFinished = false;
 
-    void Start() {
+    public static GridManagerScript Instance {
+        get;
+        private set;
+    }
+
+    void Awake() {
+        if (Instance == null) { 
+            Instance = this;
+        }
+        else {
+            Destroy(gameObject);
+        }
+
         _currentMines = _totalMines = SettingsScript.TotalMines;
         _width = SettingsScript.MapSize.x;
         _height = SettingsScript.MapSize.y;
 
         _map = new CellScript[_width, _height];
-        
-        Debug.Log("current mines: " + _currentMines);
+    }
 
+    void Start() {
         // !!!
         GameObject smileButton = Instantiate(_smileButtonPrefab, new Vector3(_width / 2.0f - 0.5f, _height + 0.5f), Quaternion.identity);
         smileButton.name = "SmileButton";
-
-        _smileButtonScript = smileButton.GetComponent<SmileButtonScript>();
-        _smileButtonScript.GridManager = this;
         // !!!
 
         GenerateMap();
@@ -81,9 +89,6 @@ public class GridManagerScript : MonoBehaviour
                 instance.name = $"Cell {x}, {y}";
 
                 CellScript cell = instance.GetComponent<CellScript>();
-                // cell.onMyLeftClick = new CellScript.OnMyClick(LeftClickHandler);
-                // cell.onMyRightClick = new CellScript.OnMyClick(RightClickHandler);
-                cell.Parent = this;
                 cell.Init(position, CellScript.EType.Safe);
 
                 _map[x, y] = cell;
@@ -207,7 +212,7 @@ public class GridManagerScript : MonoBehaviour
             }
         }
 
-        _smileButtonScript.SetLose();
+        SmileButtonScript.Instance.SetLose();
     }
 
     void Win() {
@@ -216,7 +221,7 @@ public class GridManagerScript : MonoBehaviour
 
         FlagMines();
 
-        _smileButtonScript.SetWin();
+        SmileButtonScript.Instance.SetWin();
     }
 
     bool AreAllSafeRevealed() {

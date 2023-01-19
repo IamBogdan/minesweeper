@@ -27,18 +27,10 @@ public class CellScript : MonoBehaviour
     public EType Type { get => _type; }
     public bool IsRevealed { get => _isRevealed; }
     public bool IsFlagged { get => _isFlagged; }
-    public GridManagerScript Parent {
-        get => _parent;
-        set => _parent = value;
-    }
     
-    // public delegate void OnMyClick(CellScript cell);
-    // public OnMyClick onMyLeftClick = null;
-    // public OnMyClick onMyRightClick = null;
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private Vector2Int _position;
     [SerializeField] private EType _type;
-    private GridManagerScript _parent;
     private SpriteRenderer _spriteRenderer;
     private bool _isFlagged;
     private bool _isRevealed;
@@ -52,19 +44,11 @@ public class CellScript : MonoBehaviour
             if (_isFlagged) {
                 return;
             }
-
-            // if (onMyLeftClick != null) {
-                // onMyLeftClick(this);
-            // }
-            _parent.LeftClickHandler(this);
+            GridManagerScript.Instance.LeftClickHandler(this);
         }
 
         if (Input.GetMouseButtonDown(1)) {
-            _parent.RightClickHandler(this);
-            // if (onMyRightClick != null) {
-                // onMyRightClick(this);
-            // }
-            // Flag();
+            GridManagerScript.Instance.RightClickHandler(this);
         }
     }
     
