@@ -3,15 +3,26 @@ using UnityEngine;
 
 public class GridManagerScript : MonoBehaviour
 {
+    public enum EGameOver {
+        Win,
+        Lose
+    }
+
     [SerializeField] private Camera _camera;
     [SerializeField] private GameObject _cellPrefab;
-    [SerializeField] private GameObject _smileButtonPrefab; // !!!
 
     private CellScript[,] _map;
     private int _width;
     private int _height;
     private int _totalMines;
-    private int _currentMines;
+    private int __currentMines;
+    private int _currentMines {
+        get => __currentMines;
+        set {
+            __currentMines = value;
+            UIActions.OnChangedFlags?.Invoke(__currentMines);
+        }
+    }
     private bool _isFirstClick = true;
     private bool _isGameFinished = false;
 
@@ -28,7 +39,10 @@ public class GridManagerScript : MonoBehaviour
             Destroy(gameObject);
         }
 
+        UIActions.OnResetGame += ResetGame;
+
         _currentMines = _totalMines = SettingsScript.TotalMines;
+        
         _width = SettingsScript.MapSize.x;
         _height = SettingsScript.MapSize.y;
 
@@ -36,11 +50,6 @@ public class GridManagerScript : MonoBehaviour
     }
 
     void Start() {
-        // !!!
-        GameObject smileButton = Instantiate(_smileButtonPrefab, new Vector3(_width / 2.0f - 0.5f, _height + 0.5f), Quaternion.identity);
-        smileButton.name = "SmileButton";
-        // !!!
-
         GenerateMap();
         GenerateMines();
     }
@@ -53,7 +62,9 @@ public class GridManagerScript : MonoBehaviour
         // Debug.Log("ClickHandler: " + cell.Position.x + ", " + cell.Position.y);
 
         if (_isFirstClick) {
+            UIActions.OnFirstClick?.Invoke();
             _isFirstClick = false;
+            
             if (_map[cell.Position.x, cell.Position.y].Type == CellScript.EType.Mine) {
                 ReplaceMine(cell.Position.x, cell.Position.y);
             }
@@ -195,6 +206,8 @@ public class GridManagerScript : MonoBehaviour
     }
 
     void Lose() {
+        UIActions.OnGameOver?.Invoke(EGameOver.Lose);
+
         _isGameFinished = true;
         Debug.Log("BAM! YOU LOSE!");
 
@@ -211,17 +224,15 @@ public class GridManagerScript : MonoBehaviour
                 _map[x, y].RevealIfMine();
             }
         }
-
-        SmileButtonScript.Instance.SetLose();
     }
 
     void Win() {
+        UIActions.OnGameOver?.Invoke(EGameOver.Win);
+
         _isGameFinished = true;
         Debug.Log("ALL ARE REVEALED. WIN!");
 
-        FlagMines();
-
-        SmileButtonScript.Instance.SetWin();
+        FlagAllMines();
     }
 
     bool AreAllSafeRevealed() {
@@ -235,14 +246,16 @@ public class GridManagerScript : MonoBehaviour
         return true;
     }
 
-    void FlagMines() {
+    void FlagAllMines() {
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 if (_map[x, y].Type == CellScript.EType.Mine && !_map[x, y].IsFlagged) {
                     _map[x, y].SwapFlag();
                 }
             }
-        }       
+        }
+        _currentMines = 0;
+        UIActions.OnChangedFlags(_currentMines);
     }
 
     public void ResetGame() {

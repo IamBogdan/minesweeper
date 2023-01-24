@@ -1,43 +1,44 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SmileButtonScript : MonoBehaviour
+public class SmileButtonScript : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Sprite _defaultSprite, _winSprite, _loseSprite;
-    private SpriteRenderer _spriteRenderer;
-
-    public static SmileButtonScript Instance {
-        get;
-        private set;
-    }
+    private Image _img;
 
     void Awake() {
-        if (Instance == null) { 
-            Instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
+        UIActions.OnGameOver += GameOverHandler; 
         
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _img = GetComponent<Image>();
         SetDefault();
     }
 
-    void OnMouseOver() {
-        if (Input.GetMouseButtonDown(0)) {
-            GridManagerScript.Instance.ResetGame();
+    void GameOverHandler(GridManagerScript.EGameOver status) {
+        if (status == GridManagerScript.EGameOver.Win) {
+            SetWin();
+        }
+        else {
+            SetLose();
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData) {
+        if (eventData.button == PointerEventData.InputButton.Left) {
+            UIActions.OnResetGame?.Invoke();
             SetDefault();
         }
     }
 
     public void SetDefault() {
-        _spriteRenderer.sprite = _defaultSprite;
+        _img.sprite = _defaultSprite;
     }
 
     public void SetWin() {
-        _spriteRenderer.sprite = _winSprite;
+        _img.sprite = _winSprite;
     }
 
     public void SetLose() {
-        _spriteRenderer.sprite = _loseSprite;
+        _img.sprite = _loseSprite;
     }
 }

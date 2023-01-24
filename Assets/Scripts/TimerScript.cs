@@ -1,26 +1,45 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
     [SerializeField] private Sprite[] _digits;
-    private SpriteRenderer _leftDigit, _midDigit, _rightDigit;
-    private float _time = 0f;
+    private Image _leftDigit, _midDigit, _rightDigit;
+    private float _time = 0.0f;
     private bool _timerOn = false;
 
     void Awake() {
-        _leftDigit = GameObject.Find("LeftDigit").GetComponent<SpriteRenderer>();
-        _midDigit = GetComponent<SpriteRenderer>();
-        _rightDigit = GameObject.Find("RightDigit").GetComponent<SpriteRenderer>();
+        _leftDigit = transform.Find("LeftDigit").GetComponent<Image>();
+        _midDigit = transform.Find("MidDigit").GetComponent<Image>();
+        _rightDigit = transform.Find("RightDigit").GetComponent<Image>();
+
+        UIActions.OnResetGame += StopWithResetTimer;
+        UIActions.OnFirstClick += StartTimer;
+        UIActions.OnGameOver += GameOverHandler;
+
+        ShowTime();
     }
 
     void Update() {
         if (_time < 1000 && _timerOn) {
             _time += Time.deltaTime;
-
-            _rightDigit.sprite = _digits[(int)_time % 10];
-            _midDigit.sprite = _digits[(int)_time / 10 % 10];
-            _leftDigit.sprite = _digits[(int)_time / 100 % 10];
+            ShowTime();
         }
+    }
+    
+    void GameOverHandler(GridManagerScript.EGameOver status) {
+        StopTimer();
+    }
+
+    private void ShowTime() {
+        _rightDigit.sprite = _digits[(int)_time % 10];
+        _midDigit.sprite = _digits[(int)_time / 10 % 10];
+        _leftDigit.sprite = _digits[(int)_time / 100 % 10];
+    }
+
+    public void StopWithResetTimer() {
+        StopTimer();
+        ResetTimer();
     }
 
     public void StopTimer() {
@@ -33,5 +52,6 @@ public class TimerScript : MonoBehaviour
 
     public void ResetTimer() {
         _time = 0.0f;
+        ShowTime();
     }
 }
