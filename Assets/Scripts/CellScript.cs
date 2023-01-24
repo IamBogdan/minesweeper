@@ -78,6 +78,7 @@ public class CellScript : MonoBehaviour
         _isFlagged = false;
         _isRevealed = false;
 
+        SetDefaultFlag();
         SetSprite(EValue.Unknown);
     }
 
@@ -115,6 +116,10 @@ public class CellScript : MonoBehaviour
 
     public void SetMine() {
         _type = EType.Mine;
+    }
+
+    public void SetDefaultFlag() {
+        _spriteRenderer.color = Color.white;
     }
 
     public void SetWrongFlag() {
