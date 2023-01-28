@@ -6,4 +6,6 @@ public static class UIActions
     public static Action<int> OnChangedFlags;
     public static Action OnFirstClick;
     public static Action<GridManagerScript.EGameOver> OnGameOver;
+    public static Action OnOpenSettings;
+    public static Action OnExitSettings;
 }

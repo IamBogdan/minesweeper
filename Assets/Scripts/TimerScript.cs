@@ -16,6 +16,7 @@ public class TimerScript : MonoBehaviour
         UIActions.OnResetGame += StopWithResetTimer;
         UIActions.OnFirstClick += StartTimer;
         UIActions.OnGameOver += GameOverHandler;
+        UIActions.OnOpenSettings += StopWithResetTimer;
 
         ShowTime();
     }

@@ -125,4 +125,8 @@ public class CellScript : MonoBehaviour
     public void SetWrongFlag() {
         _spriteRenderer.color = new Color(1.0f, 200 / 255.0f, 1.0f);
     }
+
+    public void Destroy() {
+        Destroy(gameObject);
+    }
 }

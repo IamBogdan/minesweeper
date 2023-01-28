@@ -31,7 +31,7 @@ public class GridManagerScript : MonoBehaviour
         private set;
     }
 
-    void Awake() {
+    private void Awake() {
         if (Instance == null) { 
             Instance = this;
         }
@@ -40,16 +40,22 @@ public class GridManagerScript : MonoBehaviour
         }
 
         UIActions.OnResetGame += ResetGame;
+        UIActions.OnOpenSettings += ClearGame;
+        UIActions.OnExitSettings += Start;
 
-        _currentMines = _totalMines = SettingsScript.TotalMines;
+        // _currentMines = _totalMines = SettingsManagerScript.TotalMines;
         
-        _width = SettingsScript.MapSize.x;
-        _height = SettingsScript.MapSize.y;
+        // _width = SettingsManagerScript.MapSize.x;
+        // _height = SettingsManagerScript.MapSize.y;
 
-        _map = new CellScript[_width, _height];
+        // _map = new CellScript[_width, _height];
     }
 
-    void Start() {
+    public void Start() {
+        _currentMines = _totalMines = SettingsManagerScript.TotalMines;
+        _width = SettingsManagerScript.MapSize.x;
+        _height = SettingsManagerScript.MapSize.y;
+
         GenerateMap();
         GenerateMines();
     }
@@ -91,7 +97,9 @@ public class GridManagerScript : MonoBehaviour
         cell.SwapFlag();
     }
 
-    void GenerateMap() {
+    private void GenerateMap() {
+        _map = new CellScript[_width, _height];
+
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 Vector2Int position = new Vector2Int(x, y);
@@ -107,7 +115,7 @@ public class GridManagerScript : MonoBehaviour
         }
     }
 
-    void GenerateMines() {
+    private void GenerateMines() {
         if (_totalMines > _width * _height) {
             _totalMines = _width * _height;
         }
@@ -127,7 +135,7 @@ public class GridManagerScript : MonoBehaviour
         }
     }
 
-    void ReplaceMine(int x, int y) {
+    private void ReplaceMine(int x, int y) {
         List<Vector2Int> free = new List<Vector2Int>();
 
         for (int xx = 0; xx < _width; xx++) {
@@ -149,11 +157,11 @@ public class GridManagerScript : MonoBehaviour
         _map[x, y].SetSafe();
     }
 
-    bool OutBounds(int x, int y) {
+    private bool OutBounds(int x, int y) {
         return x < 0 || y < 0 || x >= _width || y >= _height;
     }
 
-    int CalcMinesNear(int x, int y) {
+    private int CalcMinesNear(int x, int y) {
         if (OutBounds(x, y)) {
             return 0;
         }
@@ -172,7 +180,7 @@ public class GridManagerScript : MonoBehaviour
         return mines;
     }
 
-    void Reveal(int x, int y) {
+    private void Reveal(int x, int y) {
         if (OutBounds(x, y) || _map[x, y].IsRevealed) {
             return;
         }
@@ -205,7 +213,7 @@ public class GridManagerScript : MonoBehaviour
         }
     }
 
-    void Lose() {
+    private void Lose() {
         UIActions.OnGameOver?.Invoke(EGameOver.Lose);
 
         _isGameFinished = true;
@@ -226,7 +234,7 @@ public class GridManagerScript : MonoBehaviour
         }
     }
 
-    void Win() {
+    private void Win() {
         UIActions.OnGameOver?.Invoke(EGameOver.Win);
 
         _isGameFinished = true;
@@ -235,7 +243,7 @@ public class GridManagerScript : MonoBehaviour
         FlagAllMines();
     }
 
-    bool AreAllSafeRevealed() {
+    private bool AreAllSafeRevealed() {
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 if (_map[x, y].Type == CellScript.EType.Safe && !_map[x, y].IsRevealed) {
@@ -246,7 +254,7 @@ public class GridManagerScript : MonoBehaviour
         return true;
     }
 
-    void FlagAllMines() {
+    private void FlagAllMines() {
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 if (_map[x, y].Type == CellScript.EType.Mine && !_map[x, y].IsFlagged) {
@@ -258,7 +266,13 @@ public class GridManagerScript : MonoBehaviour
         UIActions.OnChangedFlags(_currentMines);
     }
 
-    public void ResetGame() {
+    private void ResetValues() {
+        _isFirstClick = true;
+        _isGameFinished = false;
+        _currentMines = _totalMines;
+    }
+
+    private void ResetGame() {
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 _map[x, y].Init(new Vector2Int(x, y), CellScript.EType.Safe);
@@ -266,9 +280,21 @@ public class GridManagerScript : MonoBehaviour
         }
         
         GenerateMines();
+        ResetValues();
+    }
 
-        _isFirstClick = true;
-        _isGameFinished = false;
-        _currentMines = _totalMines;
+    private void ClearGame() {
+        if (_map == null) {
+            return;
+        }
+
+        ResetValues();
+        
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                _map[x, y].Destroy();
+            }
+        }
+        _map = null;
     }
 }

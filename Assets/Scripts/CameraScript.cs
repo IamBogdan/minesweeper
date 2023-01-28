@@ -4,25 +4,45 @@ using UnityEngine.UI;
 
 public class CameraScript : MonoBehaviour
 {
-    void Awake()
-    {
-        Camera camera = GetComponent<Camera>();
-        PixelPerfectCamera pixelCamera = GetComponent<PixelPerfectCamera>();
+    private Camera _camera;
+    private PixelPerfectCamera _pixelCamera;
+    private float _UIPanelPixelHeight;
 
-        int width = SettingsScript.MapSize.x;
-        int height = SettingsScript.MapSize.y;
+    private void Awake() {
+        _camera = GetComponent<Camera>();
+        _pixelCamera = GetComponent<PixelPerfectCamera>();
+        _UIPanelPixelHeight = GameObject.Find("UIPanel").GetComponent<RectTransform>().sizeDelta.y;
 
-        int scale = 2; // 1 2 4 8
+        GameObject.Find("Canvas").GetComponent<CanvasScaler>().scaleFactor = SettingsManagerScript.CameraScale;
 
-        float UIPanelPixelHeight = GameObject.Find("UIPanel").GetComponent<RectTransform>().sizeDelta.y;
+        UIActions.OnOpenSettings += SetSettingsCamera;
+        UIActions.OnExitSettings += SetCamera;
 
-        camera.transform.position = new Vector3(width / 2.0f - 0.5f, (height + UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
+        SetCamera();
+    }
+
+    private void SetSettingsCamera() {
+        int width = 256;
+        int height = 256;
+
+        _camera.transform.position = new Vector3(width / (16 + 2.0f - 0.5f), (height / 16 + _UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
+
+        _pixelCamera.refResolutionX = width;
+        _pixelCamera.refResolutionY = height;
+
+        Screen.SetResolution(_pixelCamera.refResolutionX * SettingsManagerScript.CameraScale, _pixelCamera.refResolutionY * SettingsManagerScript.CameraScale, false);
+    }
+
+    private void SetCamera() {
+        int width = SettingsManagerScript.MapSize.x;
+        int height = SettingsManagerScript.MapSize.y;
+
+        _camera.transform.position = new Vector3(width / 2.0f - 0.5f, (height + _UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
         // camera.orthographicSize = (height + UIPanelPixelHeight / 16) / 2;
-    
-        pixelCamera.refResolutionX = SettingsScript.PixelCellSize.x * width;
-        pixelCamera.refResolutionY = SettingsScript.PixelCellSize.y * height + (int)UIPanelPixelHeight;
 
-        GameObject.Find("Canvas").GetComponent<CanvasScaler>().scaleFactor = scale;
-        Screen.SetResolution(pixelCamera.refResolutionX * scale, pixelCamera.refResolutionY * scale, false);
+        _pixelCamera.refResolutionX = SettingsManagerScript.PixelCellSize.x * width;
+        _pixelCamera.refResolutionY = SettingsManagerScript.PixelCellSize.y * height + (int)_UIPanelPixelHeight;
+
+        Screen.SetResolution(_pixelCamera.refResolutionX * SettingsManagerScript.CameraScale, _pixelCamera.refResolutionY * SettingsManagerScript.CameraScale, false);
     }
 }

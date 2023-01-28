@@ -14,7 +14,7 @@ public class FlagCounterScript : MonoBehaviour
 
         UIActions.OnChangedFlags += SetValue;
 
-        SetValue(SettingsScript.TotalMines);
+        SetValue(SettingsManagerScript.TotalMines);
     }
 
     public void SetValue(int flags) {

@@ -4,11 +4,13 @@ using UnityEngine.EventSystems;
 
 public class SmileButtonScript : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Sprite _defaultSprite, _winSprite, _loseSprite;
+    [SerializeField] private Sprite _defaultSprite, _winSprite, _loseSprite, _settingsSprite;
+    [SerializeField] private SettingsManagerScript _settingsManager;
     private Image _img;
+    private bool _isSettings = false;
 
     void Awake() {
-        UIActions.OnGameOver += GameOverHandler; 
+        UIActions.OnGameOver += GameOverHandler;
         
         _img = GetComponent<Image>();
         SetDefault();
@@ -24,21 +26,37 @@ public class SmileButtonScript : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (eventData.button == PointerEventData.InputButton.Left) {
+        if (_isSettings) {
+            _settingsManager.SubmitAndHideSettings();
+            UIActions.OnExitSettings?.Invoke();
+            SetDefault();
+            _isSettings = false;
+        }
+        else if (eventData.button == PointerEventData.InputButton.Left) {
             UIActions.OnResetGame?.Invoke();
             SetDefault();
         }
+        else if (eventData.button == PointerEventData.InputButton.Right) { // open settings
+            UIActions.OnOpenSettings?.Invoke();
+            SetSettings();
+            _settingsManager.ActivateMenu();
+            _isSettings = true;
+        }
     }
 
-    public void SetDefault() {
+    private void SetDefault() {
         _img.sprite = _defaultSprite;
     }
 
-    public void SetWin() {
+    private void SetWin() {
         _img.sprite = _winSprite;
     }
 
-    public void SetLose() {
+    private void SetLose() {
         _img.sprite = _loseSprite;
+    }
+
+    private void SetSettings() {
+        _img.sprite = _settingsSprite;
     }
 }
