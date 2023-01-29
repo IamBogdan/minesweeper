@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class FlagCounterScript : MonoBehaviour
 {
-    [SerializeField] private Sprite[] _digits;
-    [SerializeField] private Sprite _minus;
+    [SerializeField] private Sprite[] _digitSprites;
+    [SerializeField] private Sprite _minusSprite;
     private Image _leftDigit, _midDigit, _rightDigit;
 
     private void Awake() {
@@ -17,22 +17,16 @@ public class FlagCounterScript : MonoBehaviour
         SetValue(SettingsManagerScript.TotalMines);
     }
 
-    public void SetValue(int flags) {
+    private void SetValue(int flags) {
         if (flags < -99 || flags > 999) {
             return;
         }
+        
+        bool isNegative = flags < 0;
+        flags = isNegative ? -flags : flags;
 
-        if (flags < 0) {
-            flags = -flags;
-
-            _leftDigit.sprite = _minus;
-            _rightDigit.sprite = _digits[flags % 10];
-            _midDigit.sprite = _digits[flags / 10 % 10];
-        }
-        else {
-            _rightDigit.sprite = _digits[flags % 10];
-            _midDigit.sprite = _digits[flags / 10 % 10];
-            _leftDigit.sprite = _digits[flags / 100 % 10];
-        }
+        _leftDigit.sprite = isNegative ? _minusSprite : _digitSprites[flags / 100 % 10];
+        _midDigit.sprite = _digitSprites[flags / 10 % 10];
+        _rightDigit.sprite = _digitSprites[flags % 10];
     }
 }

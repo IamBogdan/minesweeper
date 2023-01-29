@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e48af1e35c76e459660c2ff6be9704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _digits:
+  _digitSprites:
   - {fileID: -1193656455, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
   - {fileID: 156731497, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
   - {fileID: -815954486, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
@@ -617,7 +617,7 @@ MonoBehaviour:
   - {fileID: 595936547, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
   - {fileID: -1826657032, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
   - {fileID: 237891075, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  _minus: {fileID: -787056475, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
+  _minusSprite: {fileID: -787056475, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
 --- !u!1 &514018305
 GameObject:
   m_ObjectHideFlags: 0
