@@ -9,14 +9,14 @@ public class SmileButtonScript : MonoBehaviour, IPointerClickHandler
     private Image _img;
     private bool _isSettings = false;
 
-    void Awake() {
+    private void Awake() {
         UIActions.OnGameOver += GameOverHandler;
         
         _img = GetComponent<Image>();
         SetDefault();
     }
 
-    void GameOverHandler(GridManagerScript.EGameOver status) {
+    private void GameOverHandler(GridManagerScript.EGameOver status) {
         if (status == GridManagerScript.EGameOver.Win) {
             SetWin();
         }

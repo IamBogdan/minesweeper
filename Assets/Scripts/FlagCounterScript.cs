@@ -7,7 +7,7 @@ public class FlagCounterScript : MonoBehaviour
     [SerializeField] private Sprite _minus;
     private Image _leftDigit, _midDigit, _rightDigit;
 
-    void Awake() {
+    private void Awake() {
         _leftDigit = transform.Find("LeftDigit").GetComponent<Image>();
         _midDigit = transform.Find("MidDigit").GetComponent<Image>();
         _rightDigit = transform.Find("RightDigit").GetComponent<Image>();

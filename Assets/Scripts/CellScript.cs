@@ -35,11 +35,11 @@ public class CellScript : MonoBehaviour
     private bool _isFlagged;
     private bool _isRevealed;
 
-    void Awake() {
+    private void Awake() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnMouseOver() {
+    private void OnMouseOver() {
         if (Input.GetMouseButtonDown(0)) {
             if (_isFlagged) {
                 return;
@@ -50,6 +50,10 @@ public class CellScript : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) {
             GridManagerScript.Instance.RightClickHandler(this);
         }
+    }
+
+    private void SetSprite(EValue value) {
+        _spriteRenderer.sprite = sprites[(int)value];
     }
     
     public void SwapFlag() {
@@ -65,10 +69,6 @@ public class CellScript : MonoBehaviour
         }
 
         _isFlagged = !_isFlagged;
-    }
-
-    void SetSprite(EValue value) {
-        _spriteRenderer.sprite = sprites[(int)value];
     }
 
     public void Init(Vector2Int position, EType type) {
