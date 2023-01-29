@@ -8,7 +8,7 @@ public class TimerScript : MonoBehaviour
     private float _time = 0.0f;
     private bool _timerOn = false;
 
-    void Awake() {
+    private void Awake() {
         _leftDigit = transform.Find("LeftDigit").GetComponent<Image>();
         _midDigit = transform.Find("MidDigit").GetComponent<Image>();
         _rightDigit = transform.Find("RightDigit").GetComponent<Image>();
@@ -21,21 +21,23 @@ public class TimerScript : MonoBehaviour
         ShowTime();
     }
 
-    void Update() {
+    private void Update() {
         if (_time < 1000 && _timerOn) {
             _time += Time.deltaTime;
             ShowTime();
         }
     }
     
-    void GameOverHandler(GridManagerScript.EGameOver status) {
+    private void GameOverHandler(GridManagerScript.EGameOver status) {
         StopTimer();
     }
 
     private void ShowTime() {
-        _rightDigit.sprite = _digits[(int)_time % 10];
-        _midDigit.sprite = _digits[(int)_time / 10 % 10];
-        _leftDigit.sprite = _digits[(int)_time / 100 % 10];
+        int time = (int)_time;
+
+        _rightDigit.sprite = _digits[time % 10];
+        _midDigit.sprite = _digits[time / 10 % 10];
+        _leftDigit.sprite = _digits[time / 100 % 10];
     }
 
     public void StopWithResetTimer() {
