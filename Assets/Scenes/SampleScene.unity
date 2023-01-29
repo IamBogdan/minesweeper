@@ -607,17 +607,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _digitSprites:
-  - {fileID: -1193656455, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 156731497, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -815954486, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1487623795, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1258887662, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 1073123447, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1266480470, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 595936547, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1826657032, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 237891075, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  _minusSprite: {fileID: -787056475, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
+  - {fileID: -1634282783, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 651193173, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -363729885, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 611077335, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -1518268123, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 1630972516, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 367075954, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -1240123832, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 1846419542, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 827275315, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  _minusSprite: {fileID: 1103617307, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
 --- !u!1 &514018305
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.76862746, g: 0.9411765, b: 0.9764706, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1670,16 +1670,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _digits:
-  - {fileID: -1193656455, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 156731497, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -815954486, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1487623795, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1258887662, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 1073123447, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1266480470, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 595936547, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: -1826657032, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
-  - {fileID: 237891075, guid: 1f300df2dcea1934b984e1667e6ea4eb, type: 3}
+  - {fileID: -1634282783, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 651193173, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -363729885, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 611077335, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -1518268123, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 1630972516, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 367075954, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: -1240123832, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 1846419542, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
+  - {fileID: 827275315, guid: b4df1c947cb1ec44290395e656855ccf, type: 3}
 --- !u!1 &1277565723
 GameObject:
   m_ObjectHideFlags: 0

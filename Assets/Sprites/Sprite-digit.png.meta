@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1f300df2dcea1934b984e1667e6ea4eb
+guid: b4df1c947cb1ec44290395e656855ccf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,11 +101,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-digit_0
+      name: Sprite-digit-latest_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +131,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfde0b5d421d5894b8e748d035dc7a86
-      internalID: -1193656455
+      spriteID: 75ae623e9e36bc54c90d5de5f2b759b3
+      internalID: -1634282783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_1
+      name: Sprite-digit-latest_1
       rect:
         serializedVersion: 2
         x: 16
@@ -140,14 +152,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4353987d49307242819b1e01dfbe217
-      internalID: 156731497
+      spriteID: 277a556586192f44dafc1ce3e7fca79d
+      internalID: 651193173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_2
+      name: Sprite-digit-latest_2
       rect:
         serializedVersion: 2
         x: 32
@@ -161,14 +173,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa69a2ea78a7b6e4db5cf97e6ef8747b
-      internalID: -815954486
+      spriteID: 3e42d8368cd622d4b803c783bcc3356f
+      internalID: -363729885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_3
+      name: Sprite-digit-latest_3
       rect:
         serializedVersion: 2
         x: 48
@@ -182,14 +194,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b5c24ae0f1df2544a3192e639f1dc69
-      internalID: -1487623795
+      spriteID: 9721eed8929dac24b81ce418cf231691
+      internalID: 611077335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_4
+      name: Sprite-digit-latest_4
       rect:
         serializedVersion: 2
         x: 64
@@ -203,14 +215,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1089c6e4cf94a974bb3e84eacdd386a5
-      internalID: -1258887662
+      spriteID: 7978ce3a345922d438fa037bae158bd2
+      internalID: -1518268123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_5
+      name: Sprite-digit-latest_5
       rect:
         serializedVersion: 2
         x: 80
@@ -224,14 +236,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44f0fe55cc8b7694599e6151e95fcc41
-      internalID: 1073123447
+      spriteID: 0c77ef34870fc1e40898c791c9c299b4
+      internalID: 1630972516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_6
+      name: Sprite-digit-latest_6
       rect:
         serializedVersion: 2
         x: 96
@@ -245,14 +257,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 233a8fb24d240594888bb5a0c59634df
-      internalID: -1266480470
+      spriteID: d1461acf51fbc9746bd8bbe50b959f77
+      internalID: 367075954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_7
+      name: Sprite-digit-latest_7
       rect:
         serializedVersion: 2
         x: 112
@@ -266,14 +278,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4100090005363842826b11afec06c08
-      internalID: 595936547
+      spriteID: 79afb90b2822d204ea5390a87b057671
+      internalID: -1240123832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_8
+      name: Sprite-digit-latest_8
       rect:
         serializedVersion: 2
         x: 128
@@ -287,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e99306e0f0206954dadf06b308cc65d2
-      internalID: -1826657032
+      spriteID: 9d3ae6c6cad243f479f1c9a0c497bf84
+      internalID: 1846419542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_9
+      name: Sprite-digit-latest_9
       rect:
         serializedVersion: 2
         x: 144
@@ -308,14 +320,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cfc0f095c0cfe7459e3f0390633d1b5
-      internalID: 237891075
+      spriteID: 9293ba5b46384a4478fa4e001c49c303
+      internalID: 827275315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_10
+      name: Sprite-digit-latest_10
       rect:
         serializedVersion: 2
         x: 160
@@ -329,14 +341,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e88a65fbd2d4c343a72556ff0943498
-      internalID: -787056475
+      spriteID: 55a10939abeb401459b3663d92df35ff
+      internalID: 1103617307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-digit_11
+      name: Sprite-digit-latest_11
       rect:
         serializedVersion: 2
         x: 176
@@ -350,8 +362,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: baa260c1b431e7741ad987d1b24397b3
-      internalID: -344319334
+      spriteID: 408eb48272a53d647b5302ce1304d2fd
+      internalID: -310776335
       vertices: []
       indices: 
       edges: []
@@ -367,18 +379,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite-digit_3: -1487623795
-      Sprite-digit_4: -1258887662
-      Sprite-digit_2: -815954486
-      Sprite-digit_10: -787056475
-      Sprite-digit_6: -1266480470
-      Sprite-digit_7: 595936547
-      Sprite-digit_11: -344319334
-      Sprite-digit_5: 1073123447
-      Sprite-digit_1: 156731497
-      Sprite-digit_8: -1826657032
-      Sprite-digit_0: -1193656455
-      Sprite-digit_9: 237891075
+      Sprite-digit-latest_9: 827275315
+      Sprite-digit-latest_5: 1630972516
+      Sprite-digit-latest_0: -1634282783
+      Sprite-digit-latest_2: -363729885
+      Sprite-digit-latest_8: 1846419542
+      Sprite-digit-latest_1: 651193173
+      Sprite-digit-latest_6: 367075954
+      Sprite-digit-latest_11: -310776335
+      Sprite-digit-latest_3: 611077335
+      Sprite-digit-latest_10: 1103617307
+      Sprite-digit-latest_4: -1518268123
+      Sprite-digit-latest_7: -1240123832
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
