@@ -38,7 +38,7 @@ public class SettingsManagerScript : MonoBehaviour
     public void SubmitAndHideSettings() {
         MapSize.x = int.TryParse(_widthField.text, out int width) ? width : MapSize.x;
         MapSize.y = int.TryParse(_heightField.text, out int height) ? height : MapSize.y;
-        TotalMines = int.TryParse(_minesField.text, out int mines) ? Math.Min(mines, MapSize.x * MapSize.y) : TotalMines;
+        TotalMines = int.TryParse(_minesField.text, out int mines) ? Math.Min(mines, MapSize.x * MapSize.y) : Math.Min(TotalMines, MapSize.x * MapSize.y);
 
         HideMenu();
     }
