@@ -1,3 +1,4 @@
+using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,8 @@ public class TimerScript : MonoBehaviour
 {
     [SerializeField] private Sprite[] _digits;
     private Image _leftDigit, _midDigit, _rightDigit;
-    private float _time = 0.0f;
-    private bool _timerOn = false;
+    private float _time = 0f;
+    private Timer _timer;
 
     private void Awake() {
         _leftDigit = transform.Find("LeftDigit").GetComponent<Image>();
@@ -19,13 +20,20 @@ public class TimerScript : MonoBehaviour
         UIActions.OnOpenSettings += StopWithResetTimer;
 
         ShowTime();
+
+        _timer = new Timer(1000);
+        _timer.Elapsed += OnTimedEvent;
+        _timer.AutoReset = true;
+    }
+
+    private void OnTimedEvent(System.Object source, ElapsedEventArgs e) {
+        if (_time < 999) { 
+            _time++;
+        }
     }
 
     private void Update() {
-        if (_time < 1000 && _timerOn) {
-            _time += Time.deltaTime;
-            ShowTime();
-        }
+        ShowTime();
     }
     
     private void GameOverHandler(GridManagerScript.EGameOver status) {
@@ -40,21 +48,21 @@ public class TimerScript : MonoBehaviour
         _leftDigit.sprite = _digits[time / 100 % 10];
     }
 
-    public void StopWithResetTimer() {
+    private void StopWithResetTimer() {
         StopTimer();
         ResetTimer();
     }
 
-    public void StopTimer() {
-        _timerOn = false;
+    private void StopTimer() {
+        _timer.Enabled = false;
     }
 
-    public void StartTimer() {
-        _timerOn = true;
+    private void StartTimer() {
+        _timer.Enabled = true;
     }
 
-    public void ResetTimer() {
-        _time = 0.0f;
+    private void ResetTimer() {
+        _time = 0f;
         ShowTime();
     }
 }
