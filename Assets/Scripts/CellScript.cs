@@ -40,6 +40,10 @@ public class CellScript : MonoBehaviour
     }
 
     private void OnMouseOver() {
+        if (_isRevealed) {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0)) {
             if (_isFlagged) {
                 return;
