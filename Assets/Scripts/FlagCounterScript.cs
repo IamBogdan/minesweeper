@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,9 +19,8 @@ public class FlagCounterScript : MonoBehaviour
     }
 
     private void SetValue(int flags) {
-        if (flags < -99 || flags > 999) {
-            return;
-        }
+        flags = Math.Min(flags, 999);
+        flags = Math.Max(flags, -99);
         
         bool isNegative = flags < 0;
         flags = isNegative ? -flags : flags;
