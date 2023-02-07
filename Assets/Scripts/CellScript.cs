@@ -23,6 +23,8 @@ public class CellScript : MonoBehaviour
         Unknown
     }
     
+    public static Vector2Int PixelCellSize = new Vector2Int(16, 16);
+
     public Vector2Int Position { get => _position; }
     public EType Type { get => _type; }
     public bool IsRevealed { get => _isRevealed; }

@@ -6,8 +6,8 @@ public class SettingsManagerScript : MonoBehaviour
 {
     public static Vector2Int MapSize = new Vector2Int(10, 10);
     public static int TotalMines = 15;
-    public static Vector2Int PixelCellSize = new Vector2Int(16, 16);
     public static int CameraScale = 2; // 1 2 4 8
+    public static Vector2Int SettingsWindowSize = new Vector2Int(256, 256);
     
     [SerializeField] private TMP_InputField _minesField, _widthField, _heightField;
     private CanvasGroup _canvasGroup; 
@@ -67,8 +67,8 @@ public class SettingsManagerScript : MonoBehaviour
         RemoveMinusFromStringStart(ref text);
         _widthField.text = text;
         
-        if (int.TryParse(text, out int width) && width * CameraScale * PixelCellSize.x > Screen.currentResolution.width) {
-            int maxWidth = Screen.currentResolution.width / (CameraScale * PixelCellSize.x);
+        if (int.TryParse(text, out int width) && width * CameraScale * CellScript.PixelCellSize.x > Screen.currentResolution.width) {
+            int maxWidth = Screen.currentResolution.width / (CameraScale * CellScript.PixelCellSize.x);
             _widthField.text = maxWidth.ToString();
         }
     }
@@ -79,8 +79,8 @@ public class SettingsManagerScript : MonoBehaviour
         RemoveMinusFromStringStart(ref text);
         _heightField.text = text;
 
-        if (int.TryParse(text, out int height) && CameraScale * (height * PixelCellSize.y + UIPanelPixelHeight) > Screen.currentResolution.height) {
-            int maxHeight = (Screen.currentResolution.height - UIPanelPixelHeight * CameraScale) / (PixelCellSize.y * CameraScale);
+        if (int.TryParse(text, out int height) && CameraScale * (height * CellScript.PixelCellSize.y + UIPanelPixelHeight) > Screen.currentResolution.height) {
+            int maxHeight = (Screen.currentResolution.height - UIPanelPixelHeight * CameraScale) / (CellScript.PixelCellSize.y * CameraScale);
             _heightField.text = maxHeight.ToString();
         }
     }

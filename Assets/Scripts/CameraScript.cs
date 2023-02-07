@@ -22,8 +22,8 @@ public class CameraScript : MonoBehaviour
     }
 
     private void SetSettingsCamera() {
-        int width = 256;
-        int height = 256;
+        int width = SettingsManagerScript.SettingsWindowSize.x;
+        int height = SettingsManagerScript.SettingsWindowSize.y;
 
         _camera.transform.position = new Vector3(width / (16 + 2.0f - 0.5f), (height / 16 + _UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
 
@@ -40,8 +40,8 @@ public class CameraScript : MonoBehaviour
         _camera.transform.position = new Vector3(width / 2.0f - 0.5f, (height + _UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
         // camera.orthographicSize = (height + UIPanelPixelHeight / 16) / 2;
 
-        _pixelCamera.refResolutionX = SettingsManagerScript.PixelCellSize.x * width;
-        _pixelCamera.refResolutionY = SettingsManagerScript.PixelCellSize.y * height + (int)_UIPanelPixelHeight;
+        _pixelCamera.refResolutionX = CellScript.PixelCellSize.x * width;
+        _pixelCamera.refResolutionY = CellScript.PixelCellSize.y * height + (int)_UIPanelPixelHeight;
 
         Screen.SetResolution(_pixelCamera.refResolutionX * SettingsManagerScript.CameraScale, _pixelCamera.refResolutionY * SettingsManagerScript.CameraScale, false);
     }
