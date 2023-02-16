@@ -42,13 +42,6 @@ public class GridManagerScript : MonoBehaviour
         UIActions.OnResetGame += ResetGame;
         UIActions.OnOpenSettings += ClearGame;
         UIActions.OnExitSettings += Start;
-
-        // _currentMines = _totalMines = SettingsManagerScript.TotalMines;
-        
-        // _width = SettingsManagerScript.MapSize.x;
-        // _height = SettingsManagerScript.MapSize.y;
-
-        // _map = new CellScript[_width, _height];
     }
 
     public void Start() {
@@ -64,8 +57,6 @@ public class GridManagerScript : MonoBehaviour
         if (_isGameFinished) {
             return;
         }
-
-        // Debug.Log("ClickHandler: " + cell.Position.x + ", " + cell.Position.y);
 
         if (_isFirstClick) {
             UIActions.OnFirstClick?.Invoke();

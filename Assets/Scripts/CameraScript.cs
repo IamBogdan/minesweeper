@@ -38,7 +38,6 @@ public class CameraScript : MonoBehaviour
         int height = SettingsManagerScript.MapSize.y;
 
         _camera.transform.position = new Vector3(width / 2.0f - 0.5f, (height + _UIPanelPixelHeight / 16) / 2.0f - 0.5f, -10);
-        // camera.orthographicSize = (height + UIPanelPixelHeight / 16) / 2;
 
         _pixelCamera.refResolutionX = CellScript.PixelCellSize.x * width;
         _pixelCamera.refResolutionY = CellScript.PixelCellSize.y * height + (int)_UIPanelPixelHeight;
