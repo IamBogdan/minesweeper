@@ -45,4 +45,9 @@ public class CameraScript : MonoBehaviour
 
         Screen.SetResolution(_pixelCamera.refResolutionX * SettingsManagerScript.CameraScale, _pixelCamera.refResolutionY * SettingsManagerScript.CameraScale, false);
     }
+
+    private void OnApplicationQuit() {
+        PlayerPrefs.DeleteKey("Screenmanager Resolution Height");
+        PlayerPrefs.DeleteKey("Screenmanager Resolution Width");
+    }
 }
